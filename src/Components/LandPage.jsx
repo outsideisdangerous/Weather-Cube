@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
 import fetchGeoCode from "../Utils/geoCode.util";
+import fetchWeather from "../Utils/oneCall.utils";
 
 function LandPage({ location, setLocation }) {
   const [geoCodes, setGeoCodes] = useState([]);
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
 
   const handleChange = (event) => {
     console.log(event.target.value);
@@ -41,20 +44,38 @@ function LandPage({ location, setLocation }) {
     fetchGeoCodeAsync();
   }, [fetchGeoCodeAsync]);
 
+  useEffect(() => {
+    fetchWeather();
+  }, []);
+
   return (
-    <div>
-      <input
-        type="text"
-        name="location"
-        placeholder="Enter location here"
-        onChange={handleChange}
-      />
-      <h1>
+    <>
+      <div>
+        <input
+          type="text"
+          name="location"
+          placeholder="Enter location here"
+          onChange={handleChange}
+        />
+      </div>
+      <div>
         {geoCodes.map((geoCode) => {
-          return `${geoCode.name} ${geoCode.country}`; // geoCode = {name: "Lon", country: "UK"}
+          return (
+            <ul>
+              <li>
+                <button
+                  onClick={() => console.log(`${geoCode.lat} ${geoCode.lon}`)}
+                  className="btn-location-list"
+                >
+                  {geoCode.name} {geoCode.country}
+                </button>
+              </li>
+            </ul>
+          );
+          // geoCode = {name: "Lon", country: "UK"}
         })}
-      </h1>
-    </div>
+      </div>
+    </>
   );
 }
 

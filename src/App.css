@@ -1,0 +1,11 @@
+.location-list > ul > li {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+.btn-location-list {
+  border: none;
+  list-style: none;
+}
