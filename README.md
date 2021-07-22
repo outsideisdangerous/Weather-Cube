@@ -1,5 +1,7 @@
-Task before 20/07/2021 standup
+2. When User starts to type new city location, the 7 day weather list should be hidden.
 
-1. Stack the geocode results vertically
-2. Attach onClick listener to each geoCode, to console.log their lat, lng
-3. Query one_call with the lat, lng
+3. When user clicks on a city, other city search results should be hidden.
+
+4. When user views the weather, there should be corresponding weath graphics.
+
+5. General CSS
