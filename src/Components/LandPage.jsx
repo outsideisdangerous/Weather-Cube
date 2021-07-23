@@ -6,14 +6,17 @@ import moment from "moment";
 function LandPage({ location, setLocation }) {
   const [geoCodes, setGeoCodes] = useState([]);
   const [sevenDays, setSevenDays] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     setLocation(event.target.value);
+    // if (event.target.value.length > 2) {
+    // disabled = false;
     setGeoCodes([]);
     setSevenDays([]);
   };
 
-  const handleBtn = async () => {
+  const handleBtn = async (event) => {
     try {
       const geoResults = await fetchGeoCode(location);
       setGeoCodes(geoResults);
@@ -51,10 +54,17 @@ function LandPage({ location, setLocation }) {
   }, [location]);
 
   const handleGeoLocation = async (geoCode) => {
+    setLoading(true);
     const { lat, lon } = geoCode;
     const sevenDay = await fetchWeather(lat, lon);
     setSevenDays(sevenDay);
+    setLoading(false);
   };
+
+  // const iconURL = (sevenDay) => {
+  //   const icon = sevenDay.weather[0].main
+  //   const URL = "http://openweathermap.org/img/wn/'icon'@2x.png";
+  // }
 
   return (
     <>
@@ -65,18 +75,21 @@ function LandPage({ location, setLocation }) {
           placeholder="Enter location here"
           onChange={handleChange}
         />
-        <button onClick={handleBtn}>Search</button>
+        <button onClick={handleBtn} disabled={location.length < 2}>
+          Search
+        </button>
       </div>
       <div>
         <ul>
           {geoCodes.map((geoCode) => {
+            const { name, country } = geoCode;
             return (
               <li>
                 <button
                   onClick={() => handleGeoLocation(geoCode)}
                   className="btn-location-list"
                 >
-                  {geoCode.name} {geoCode.country}
+                  {name} {country}
                 </button>
               </li>
             );
@@ -87,10 +100,15 @@ function LandPage({ location, setLocation }) {
       <div>
         <ul>
           {sevenDays.map((sevenDay) => {
+            const { icon, main } = sevenDay.weather[0];
             return (
               <li>
                 <span>{moment(sevenDay.dt * 1000).format("DD/MM/YY")}</span>
-                {sevenDay.weather[0].main}
+                {main}
+                <img
+                  src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                  alt=""
+                />
               </li>
             );
           })}
