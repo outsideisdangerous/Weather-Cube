@@ -7,7 +7,7 @@ export const fetchWeather = async (cat, dog) => {
     params.append("lon", dog);
     params.append("appid", "ad33afc21810adf95292cdc60ea1f573");
     const url =
-      "https://api.openweathermap.org/data/2.5/onecall?lat=25.29&lon=112.87&exclude=minutely,hourly,alerts&appid=ad33afc21810adf95292cdc60ea1f573";
+      "https://api.openweathermap.org/data/2.5/onecall?exclude=minutely,hourly,alerts";
     const response = await axios.get(url, { params });
     // Object destructuring (two birds one stone)
     const { daily } = response.data;

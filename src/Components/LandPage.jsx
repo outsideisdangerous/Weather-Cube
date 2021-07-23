@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import fetchGeoCode from "../Utils/geoCode.util";
 import fetchWeather from "../Utils/oneCall.utils";
 import moment from "moment";
@@ -9,6 +9,8 @@ function LandPage({ location, setLocation }) {
 
   const handleChange = (event) => {
     setLocation(event.target.value);
+    setGeoCodes([]);
+    setSevenDays([]);
   };
 
   const handleBtn = async () => {
@@ -47,10 +49,6 @@ function LandPage({ location, setLocation }) {
       console.log(error.message);
     }
   }, [location]);
-
-  // useEffect(() => {
-  //   fetchGeoCodeAsync();
-  // }, [fetchGeoCodeAsync]);
 
   const handleGeoLocation = async (geoCode) => {
     const { lat, lon } = geoCode;
