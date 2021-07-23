@@ -18,8 +18,10 @@ function LandPage({ location, setLocation }) {
 
   const handleBtn = async (event) => {
     try {
+      setLoading(true);
       const geoResults = await fetchGeoCode(location);
       setGeoCodes(geoResults);
+      setLoading(false);
     } catch (error) {
       console.log(error.message);
     }
@@ -78,6 +80,7 @@ function LandPage({ location, setLocation }) {
         <button onClick={handleBtn} disabled={location.length < 2}>
           Search
         </button>
+        {loading && <span>loading</span>}
       </div>
       <div>
         <ul>
