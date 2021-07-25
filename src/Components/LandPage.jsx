@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import fetchGeoCode from "../Utils/geoCode.util";
 import fetchWeather from "../Utils/oneCall.utils";
 import moment from "moment";
@@ -19,6 +19,7 @@ function LandPage({ location, setLocation }) {
       setLoading(true);
       const geoResults = await fetchGeoCode(location);
       setGeoCodes(geoResults);
+
       setLoading(false);
     } catch (error) {
       alert(error.message);
@@ -42,7 +43,7 @@ function LandPage({ location, setLocation }) {
     <>
       <div>
         <input
-          className="p-1"
+          className="p-1 h-10"
           type="text"
           name="location"
           placeholder="Enter location here"
@@ -56,12 +57,12 @@ function LandPage({ location, setLocation }) {
       <div>
         <ul className="p-4 text-gray-900 text-lg lg:text-2xl">
           {geoCodes.map((geoCode) => {
-            const { name, country } = geoCode;
+            const { name, country, lat } = geoCode;
             return (
-              <li>
+              <li key={`${name}${country}${lat}`}>
                 <button
                   onClick={() => handleGeoLocation(geoCode)}
-                  className="btn-location-list"
+                  className="btn-location-list mb-5 md:mb-0"
                 >
                   {name} {country}
                 </button>

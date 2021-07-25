@@ -9,8 +9,7 @@ export const fetchGeoCode = async (location) => {
   params.append("appid", "ad33afc21810adf95292cdc60ea1f573");
   params.append("limit", 5);
   const url = "http://api.openweathermap.org/geo/1.0/direct";
-  const response = await axios.get(url, { params }); // response.data is missing => undefined
-  console.log(response.data);
+  const response = await axios.get(url, { params });
   return response.data;
 };
 
