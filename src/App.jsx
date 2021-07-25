@@ -16,7 +16,7 @@ function App() {
   // }
 
   return (
-    <div>
+    <div className="container space-y-3">
       <LandPage location={location} setLocation={setLocation} />
       {/* <WeatherView location={location} /> */}
     </div>

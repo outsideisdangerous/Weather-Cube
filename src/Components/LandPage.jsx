@@ -42,6 +42,7 @@ function LandPage({ location, setLocation }) {
     <>
       <div>
         <input
+          className="p-1"
           type="text"
           name="location"
           placeholder="Enter location here"
@@ -53,7 +54,7 @@ function LandPage({ location, setLocation }) {
         {loading && <span>loading</span>}
       </div>
       <div>
-        <ul>
+        <ul className="p-4 text-gray-900 text-lg lg:text-2xl">
           {geoCodes.map((geoCode) => {
             const { name, country } = geoCode;
             return (
@@ -71,14 +72,14 @@ function LandPage({ location, setLocation }) {
         </ul>
       </div>
       <div>
-        <ul>
+        <ul className="md:flex">
           {sevenDays.map((sevenDay) => {
             const { icon, main } = sevenDay.weather[0];
             return (
-              <li>
+              <li className="flex-1 bg-white text-gray-600 rounded-lg shadow-xl p-4 font-bold">
                 {`${moment(sevenDay.dt * 1000).format("DD/MM/YY")} ${main}`}
-
                 <img
+                  className=""
                   src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
                   alt=""
                 />
