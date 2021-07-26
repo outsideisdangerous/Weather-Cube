@@ -78,7 +78,8 @@ function LandPage({ location, setLocation }) {
             const { icon, main } = sevenDay.weather[0];
             return (
               <li className="flex-1 bg-white text-gray-600 rounded-lg shadow-xl p-4 font-bold">
-                {`${moment(sevenDay.dt * 1000).format("DD/MM/YY")} ${main}`}
+                {`${moment(sevenDay.dt * 1000).format("DD/MM/YY")}`}
+                <div>{`${main}`}</div>
                 <img
                   className=""
                   src={`http://openweathermap.org/img/wn/${icon}@2x.png`}

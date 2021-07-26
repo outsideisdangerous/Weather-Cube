@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const fetchGeoCode = async (location) => {
   const params = new URLSearchParams();
+
   if (location === "") {
     throw new Error("Empty location is not valid.");
   }
