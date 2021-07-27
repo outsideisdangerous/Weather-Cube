@@ -18,6 +18,9 @@ function LandPage({ location, setLocation }) {
     try {
       setLoading(true);
       const geoResults = await fetchGeoCode(location);
+      if (!geoResults.length) {
+        throw new Error("hello");
+      }
       setGeoCodes(geoResults);
 
       setLoading(false);
@@ -77,7 +80,7 @@ function LandPage({ location, setLocation }) {
           {sevenDays.map((sevenDay) => {
             const { icon, main } = sevenDay.weather[0];
             return (
-              <li className="flex-1 bg-white text-gray-600 rounded-lg shadow-xl p-4 font-bold">
+              <li className="flex-1 bg-white text-gray-500 rounded-lg shadow-xl p-4 font-bold hover:bg-gray-700 hover:text-white">
                 {`${moment(sevenDay.dt * 1000).format("DD/MM/YY")}`}
                 <div>{`${main}`}</div>
                 <img
