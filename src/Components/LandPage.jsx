@@ -71,7 +71,6 @@ function LandPage({ location, setLocation }) {
                 </button>
               </li>
             );
-            // geoCode = {name: "Lon", country: "UK"}
           })}
         </ul>
       </div>

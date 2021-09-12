@@ -4,19 +4,9 @@ import LandPage from "./Components/LandPage";
 function App() {
   const [location, setLocation] = useState("");
 
-  // const viewWeather = async () => {
-  //   const weatherInfo = await fetchGeoCode(
-  //     location,
-  //   );
-
-  //   setWeather
-  //   setWeatherTab(true);
-  // }
-
   return (
     <div className="containerz space-y-5 lg:p-48">
       <LandPage location={location} setLocation={setLocation} />
-      {/* <WeatherView location={location} /> */}
     </div>
   );
 }
