@@ -7,6 +7,7 @@ function LandPage({ location, setLocation }) {
   const [geoCodes, setGeoCodes] = useState([]);
   const [sevenDays, setSevenDays] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (event) => {
     setLocation(event.target.value);
@@ -16,16 +17,14 @@ function LandPage({ location, setLocation }) {
 
   const handleBtn = async (event) => {
     try {
+      setError(null);
       setLoading(true);
       const geoResults = await fetchGeoCode(location);
-      if (!geoResults.length) {
-        throw new Error("hello");
-      }
       setGeoCodes(geoResults);
-
-      setLoading(false);
     } catch (error) {
-      alert(error.message);
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,17 +45,21 @@ function LandPage({ location, setLocation }) {
     <>
       <div>
         <input
-          className="p-1 h-10"
+          className="p-2 h-10 shadow-md rounded-lg "
           type="text"
           name="location"
           placeholder="Enter location here"
           onChange={handleChange}
         />
-        <button onClick={handleBtn} disabled={location.length < 2}>
+        <button
+          onClick={handleBtn}
+          className="ml-8 bg-blue-400 p-2 rounded-lg shadow-md active:bg-blue-600"
+        >
           Search
         </button>
-        {loading && <span>loading</span>}
+        {loading && <div>loading...</div>}
       </div>
+      {error && <div>{error}</div>}
       <div>
         <ul className="p-4 text-gray-900 text-lg lg:text-2xl">
           {geoCodes.map((geoCode) => {
